@@ -8,6 +8,7 @@ import torch.optim as optim
 import torchvision
 from   torch.utils.data.dataloader import DataLoader
 from   torchvision import transforms
+from torchvision.transforms import Lambda
 from   model import *
 
 from PIL import ImageFile
@@ -30,8 +31,8 @@ parser.add_argument('--num_steps',             default=25,    type=int, help='Nu
 parser.add_argument('--batch_size',            default=128,       type=int,   help='Batch size')
 parser.add_argument('--lr',                    default=0.1,   type=float, help='Learning rate')
 parser.add_argument('--leak_mem',              default=0.99,   type=float, help='Leak_mem')
-parser.add_argument('--arch',              default='vgg11',   type=str, help='Dataset [vgg9, vgg11]')
-parser.add_argument('--dataset',              default='cifar100',   type=str, help='Dataset [cifar10, cifar100]')
+parser.add_argument('--arch',              default='vgg11',   type=str, help='Dataset [vgg9, vgg11, fcmnist]')
+parser.add_argument('--dataset',              default='cifar100',   type=str, help='Dataset [cifar10, cifar100, mnist')
 parser.add_argument('--num_epochs',            default=120,       type=int,   help='Number of epochs')
 parser.add_argument('--num_workers',           default=4, type=int, help='number of workers')
 parser.add_argument('--train_display_freq',    default=10, type=int, help='display_freq for train')
@@ -109,6 +110,34 @@ elif args.dataset == 'cifar100':
                                             download=True, transform=transform_train)
     test_set = torchvision.datasets.CIFAR100(root='./data', train=False,
                                             download=True, transform=transform_test)
+
+elif args.dataset == 'mnist':
+    # use sequentiao MNIST dataset
+    num_cls = 10
+    img_size = 28
+
+        # 定义一个函数将图像转换为序列
+    def image_to_sequence(img):
+        return img.view(-1, 28)
+
+    # 在你的转换中添加这个函数
+    transform_train_mnist = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((0.1307,), (0.3081,)),
+        Lambda(image_to_sequence),
+    ])
+
+    transform_test_mnist = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((0.1307,), (0.3081,)),
+        Lambda(image_to_sequence),
+    ])
+
+
+    train_set = torchvision.datasets.MINIST(root='./data', train=True,
+                                            download=True, transform=transform_train_mnist)
+    test_set = torchvision.datasets.MINIST(root='./data', train=False,
+                                            download=True, transform=transform_test_mnist)
 else:
     print("not implemented yet..")
     exit()
@@ -127,6 +156,8 @@ if args.arch == 'vgg9':
     model = SNN_VGG9_BNTT(num_steps = num_steps, leak_mem=leak_mem, img_size=img_size,  num_cls=num_cls)
 elif args.arch == 'vgg11':
     model = SNN_VGG11_BNTT(num_steps = num_steps, leak_mem=leak_mem, img_size=img_size,  num_cls=num_cls)
+elif args.arch == 'fcmnist':
+    model = SNN_FC_BNTT(num_steps = num_steps, leak_mem=leak_mem, img_size=img_size,  num_cls=num_cls)
 else:
     print("not implemented yet..")
     exit()
