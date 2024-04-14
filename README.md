@@ -19,47 +19,6 @@ Spiking Neural Networks (SNNs) have recently emerged as an alternative to deep l
 | BNTT+early exit | CIFAR-10         | 20        | 89.5         | 90.3                      |
 | BNTT(FC)        | Sequential MNIST | 25        | 98.6         | 96.6                      |
 
-## Prerequisites
-* Ubuntu 18.04    
-* Python 3.6+    
-* PyTorch 1.5+ (recent version is recommended)     
-* NVIDIA GPU (>= 12GB)        
-
-## Getting Started
-
-### Installation
-* Configure virtual (anaconda) environment
-```
-conda create -n env_name python=3.7
-source activate env_name
-conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
-```
-
-
-## Training and testing
-
-* We provide VGG9/VGG11 architectures on CIFAR10/CIAR100 datasets
-* ```train.py```: code for training  
-* ```model.py```: code for VGG9/VGG11 Spiking Neural Networks with BNTT  
-* ```utill.py```: code for accuracy calculation / learning rate scheduler
-
-*  Run the following command for VGG9 SNN on CIFAR10
-
-```
-python train.py --num_steps 25 --lr 0.3 --arch 'vgg9' --dataset 'cifar10' --batch_size 256 --leak_mem 0.95 --num_workers 4 --num_epochs 100
-```
-
-*  Run the following command for VGG11 SNN on CIFAR100
-
-```
-python train.py --num_steps 30 --lr 0.3 --arch 'vgg11' --dataset 'cifar100' --batch_size 128 --leak_mem 0.99 --num_workers 4 --num_epochs 100
-```
-
-* The output of files are:
-* ```spikeoutput.txt```: containing the output of the spike rate
-* ```learnableweights.txt```: containing the output of the learnable parameter weight of each BNTT layer across all time-step
-
-
 ## Citation
  
 Please consider citing our paper:
