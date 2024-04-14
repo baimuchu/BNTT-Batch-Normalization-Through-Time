@@ -1,11 +1,12 @@
 # BNTT-Batch-Normalization-Through-Time[Reproduction]
-Group 16
+Group 16, [Reproduce report](https://hackmd.io/@Sheepesther/H1pbJESlC)
 
 This repository contains the source code associated with [arXiv preprint arXiv:2010.01729][arXiv preprint arXiv:2010.01729]
 
 Accepted to Frontiers in Neuroscience (2021)
 
 [arXiv preprint arXiv:2010.01729]: https://arxiv.org/abs/2010.01729
+
 
 ## Introduction
 ![image](./Poster.png)
