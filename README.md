@@ -47,6 +47,10 @@ python train.py --num_steps 25 --lr 0.3 --arch 'vgg9' --dataset 'cifar10' --batc
 python train.py --num_steps 30 --lr 0.3 --arch 'vgg11' --dataset 'cifar100' --batch_size 128 --leak_mem 0.99 --num_workers 4 --num_epochs 100
 ```
 
+* The output of files are:
+* ```spikeoutput.txt```: containing the output of the spike rate
+* ```learnableweights.txt```: containing the output of the learnable parameter weight of each BNTT layer across all time-step
+
 
 ## Citation
  
