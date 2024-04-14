@@ -10,6 +10,7 @@ from   torch.utils.data.dataloader import DataLoader
 from   torchvision import transforms
 from torchvision.transforms import Lambda
 from   model import *
+from FCmodel import *
 
 from PIL import ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
@@ -134,9 +135,9 @@ elif args.dataset == 'mnist':
     ])
 
 
-    train_set = torchvision.datasets.MINIST(root='./data', train=True,
+    train_set = torchvision.datasets.MNIST(root='./data', train=True,
                                             download=True, transform=transform_train_mnist)
-    test_set = torchvision.datasets.MINIST(root='./data', train=False,
+    test_set = torchvision.datasets.MNIST(root='./data', train=False,
                                             download=True, transform=transform_test_mnist)
 else:
     print("not implemented yet..")
