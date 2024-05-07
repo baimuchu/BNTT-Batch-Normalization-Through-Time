@@ -24,7 +24,7 @@ Spiking Neural Networks (SNNs) have recently emerged as an alternative to deep l
 
 ## Citation
  
-Please consider citing our paper:
+Please consider citing the original paper:
  ```
  @article{kim2020revisiting,
   title={Revisiting Batch Normalization for Training Low-latency Deep Spiking Neural Networks from Scratch},
